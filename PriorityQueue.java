@@ -3,12 +3,12 @@ import java.util.ArrayList;
 public class PriorityQueue<T extends Comparable<T>> {
   private final ArrayList<T> list = new ArrayList<>();
 
-  public void Add(T item) {
+  public void add(T item) {
     int insertIndex = findIndex(item);  
     list.add(insertIndex, item);
   }
 
-  public T Remove() {
+  public T remove() {
     if (list.size() > 0)
       return list.remove(0);
     else
@@ -31,13 +31,11 @@ public class PriorityQueue<T extends Comparable<T>> {
     int index = 0;
     Iterator<T> it = getIterator();
     while(it.hasNext()) {
-      index++;
       T current = it.getNext();
       if (current.compareTo(item) < 0)
         return index;
-      if (current.compareTo(item) == 0)
-        continue;
+      index++;
     }
-    return 0;
+    return index;
   }
 }
