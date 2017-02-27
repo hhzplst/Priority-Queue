@@ -1,4 +1,4 @@
-public interface Iterator<E> {
-  E getNext();
+public interface Iterator<T> {
+  T getNext();
   boolean hasNext();
 } 
