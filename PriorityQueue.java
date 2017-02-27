@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class PriorityQueue<T extends Comparable> {
+public class PriorityQueue<T extends Comparable<T>> {
   private final ArrayList<T> list = new ArrayList<>();
 
   public void Add(T item) {
@@ -9,23 +9,22 @@ public class PriorityQueue<T extends Comparable> {
   }
 
   public T Remove() {
-    if (list.size() > 0) {
-      list.remove(0);
-    } else {
-      System.out.println("No more element!");      
-    }
+    if (list.size() > 0)
+      return list.remove(0);
+    else
+      return null;
   }
   
   public Iterator<T> getIterator() {
-    return new Iterator() {
+    return new Iterator<T>() {
       int index = 0;
       public boolean hasNext() {
         return index < list.size();
       }
-      public T next() {
-        return list[index++];
+      public T getNext() {
+        return list.get(index++);
       }
-    }
+    };
   }
 
   private int findIndex(T item) {
@@ -33,11 +32,12 @@ public class PriorityQueue<T extends Comparable> {
     Iterator<T> it = getIterator();
     while(it.hasNext()) {
       index++;
-      T current = it.next();
+      T current = it.getNext();
       if (current.compareTo(item) < 0)
         return index;
       if (current.compareTo(item) == 0)
         continue;
     }
+    return 0;
   }
 }
